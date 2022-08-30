@@ -1,0 +1,13 @@
+py -m pip install Django
+
+pip install virtualenv 
+
+virtualenv venv
+
+call venv/Scripts/activate
+
+django-admin startproject djangoApp
+
+cd to djangoApp   >>>♠ python manage.py startapp core
+
+python manage.py  startserver

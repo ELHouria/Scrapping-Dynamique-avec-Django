@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Django App </title>
+    <style>
+
+
+        
+        *{
+            margin:10px;
+            font-family:"Roboto";
+            font-size:20px;
+            box-sizing:border-box;
+            text-align:center;s
+         
+        }
+
+        #main{
+            text-align:center;
+            padding-top:50px;
+
+        }
+
+       
+       
+       
+       .main2{
+        display: flex;
+        justify-content: center;
+       }
+       
+       
+       
+
+        input[type="text"]{
+
+            width:30%;
+            padding:10px;
+            border: 2px solid black;
+            border-radius:50px;
+
+        }
+
+        input[type="submit"]{
+            width:30%;
+            padding:10px;
+            border: 2px solid purple;
+            border-radius:50px;
+            background-color:purple;
+            color:white;
+            cursor:pointer;
+        }
+
+
+        table {
+            width: 800px;
+            margin-top: 80px;
+            /* border: 1px solid #343a40; */
+            border-collapse: collapse;
+            font-size: 18px;
+          }
+          
+          th,
+          td {
+            /* border: 1px solid #343a40; */
+            padding: 16px 24px;
+            text-align: left;
+          }
+          
+          thead th {
+            background-color: #E0B0FF;
+            color: #fff;
+            width: 25%;
+          }
+          
+          tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+          }
+          
+          tbody tr:nth-child(odd) {
+            background-color: #e9ecef;
+          }
+          
+          
+    </style>
+</head>
+
+
+<body>
+
+    <div id='main'>
+
+        <h1>Scapping with Django</h1>
+        <form method="GET">
+            <input type="text" placeholder="Search..."  name="search" id="search"><br>
+            <input type="submit" value="submit">
+
+
+
+        </form>
+        
+
+    </div>    
+ 
+<div class='main2'>    
+
+    {% if data and query and data2   %}
+   
+        {% comment %}   JUMIA Table {% endcomment %}
+    
+
+        <table>
+            <thead>
+
+                <tr>
+                    <th style="background-color:#E0B0FF"> From Jumia   </th>
+                    <th style="background-color:#E0B0FF">  </th>
+                    <th style="background-color:#E0B0FF">  </th>
+                </tr>
+
+              <tr>
+                <th> Price </th>
+                <th>  Product Name  </th>
+                <th>  Product Image  </th>
+              </tr>
+            </thead>
+
+                {% for prod in data  %}
+                <tr>
+                      <td>{{ prod.0 }}</td>
+                    
+
+                      <td>{{  prod.1  }}</td>
+                      <td>  <img src={{  prod.2  }} alt="" border=3 height=200 width=200></img>    </td>
+                    </tr>
+                 {% endfor %}
+            
+                
+
+            <tbody>
+
+          </table>
+
+      {% comment %}   Amazon Table {% endcomment %}
+
+
+          <table>
+            <thead>
+                <tr>
+                    <th style="background-color:#E0B0FF"> From Amazon    </th>
+                    <th style="background-color:#E0B0FF">  </th>
+                    <th style="background-color:#E0B0FF">  </th>
+                </tr>
+              <tr>
+                <th> Price </th>
+                <th>  Product Name  </th>
+                <th>  Product Image  </th>
+              </tr>
+            </thead>
+                {% for prod in data2  %}
+                <tr>
+                      <td>{{ prod.0 }}</td>
+                    
+                      <td>{{  prod.1  }}</td>
+                      <td>  <img src={{  prod.2  }} alt="" border=3 height=200 width=200></img>    </td>
+                    </tr>
+                 {% endfor %}
+            
+                
+            <tbody>
+          </table>
+  
+
+   
+        
+    {% endif %}
+
+   {% comment %} Add the case when the product doesn exist in jumia and convert price to dh {% endcomment %}
+
+    {% if length == 0 and query and  length2 == 0   %}  
+    <h1>Ooops...this product is not available !! try again</h1>
+
+    {% endif %}
+
+
+    {% if length == 0 and query and  length2 != 0     %}  
+    <h1>this product is not available in jumia website !!</h1>
+    {% comment %} Problem with Amazon website : if the product doesnt exist they dont say it they list out other prods {% endcomment %}
+
+    {% comment %} So best tips : search with general terms , then choose from the amazon website (beacause the search if relevent in jumia than in amazon)if it exists in jumia and avoid english keywords {% endcomment %}
+
+
+    {% endif %}
+
+    {% if length != 0 and query and  length2 == 0  %}  
+    <h1>this product is not available in Amazon website !!</h1>
+    {% endif %}
+
+</div>    
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
